@@ -1,0 +1,25 @@
+font{
+    font-family: Cambria;
+    font-size: 20px;
+}
+
+.button{
+    -fx-background-color: #66b3ff;
+    -fx-padding: 4;
+}
+
+.button:hover{
+    -fx-background-color: #80bfff;
+    -fx-color: -fx-hover-base;
+}
+
+.label{
+    -fx-background-color:#66b3ff;
+    -fx-border-color:black;
+    -fx-border-width: 1px;
+}
+
+.tablaJugadores{
+    -fx-background-color:#66b3ff;
+}
+
