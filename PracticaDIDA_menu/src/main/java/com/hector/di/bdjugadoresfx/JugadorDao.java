@@ -1,0 +1,149 @@
+package com.hector.di.bdjugadoresfx;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class JugadorDao {
+    
+    public static final String URL_CONEXION = "jdbc:mysql://localhost:3306/BDjugadoresFX?serverTimezone=Europe/Madrid";
+//     public static final String URL_CONEXION = "jdbc:mysql://localhost:3306/user?serverTimezone=Europe/Madrid";
+    public static final String USUARIO_BD = "root";
+    public static final String PASSWORD_BD = "hector";
+
+    public JugadorDao() {
+        crearTablaSiNoExiste();
+    }
+
+    private void crearTablaSiNoExiste() {
+        //Asi se hace la conexion a la base de datos
+        try (Connection conexionDataBase =
+            DriverManager.getConnection(URL_CONEXION, USUARIO_BD, PASSWORD_BD)){
+            Statement statement = conexionDataBase.createStatement();
+            String sql = "CREATE TABLE IF NOT EXISTS jugadores" +
+                "(id INTEGER PRIMARY KEY auto_increment, " +
+                " nombre VARCHAR(255), " +
+                "descripcion VARCHAR(255)," +
+                "posicion ENUM('portero', 'defensa', 'centrocampista', 'delantero')," +
+                "goles INT(5)," +
+                "nota DOUBLE," +
+                "club VARCHAR(4))";
+            statement.executeUpdate(sql);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void guardarOActualizar(Jugador jugador){
+        
+        if (jugador.getId() == 0){
+            guardar(jugador);
+        }else{
+            actualizar(jugador);
+        }
+        
+    }
+
+    private void guardar(Jugador jugador) {
+        
+        try (Connection conexionDataBase =
+            DriverManager.getConnection(URL_CONEXION, USUARIO_BD, PASSWORD_BD)){
+            Statement statement = conexionDataBase.createStatement();
+            String sql = "INSERT INTO jugadores(nombre, descripcion, posicion, goles, nota, club) " +
+            "VALUES ('" + jugador.getNombre() + "', '" + jugador.getDescripcion() + "', '" + jugador.getPosicion() +
+                    "', '" + jugador.getGoles() + "', '" + jugador.getNota() + "', '" + jugador.getClub() + "')";
+            statement.executeUpdate(sql);
+        } catch (Exception ex) {
+            throw new RuntimeException("Ocurrio un error al guardar la informacion: " + ex.getMessage());
+        }
+
+    }
+
+    private void actualizar(Jugador jugador) {
+        
+        try (Connection conexionDataBase =
+            DriverManager.getConnection(URL_CONEXION, USUARIO_BD, PASSWORD_BD)){
+            Statement statement = conexionDataBase.createStatement();
+            String sql = "UPDATE jugadores set nombre='" + jugador.getNombre() +
+            "', descripcion='" + jugador.getDescripcion() + "', posicion='" + jugador.getPosicion() +
+                    "', goles='" + jugador.getGoles() + "', nota='" + jugador.getNota() + "', club='" + jugador.getClub() + "' WHERE id=" + jugador.getId();
+            statement.executeUpdate(sql);
+        } catch (Exception ex) {
+            throw new RuntimeException("Ocurrio un error al actualizar la informacion: " + ex.getMessage());
+        }
+    }
+    
+    public List<Jugador> buscarTodos(){
+        List<Jugador> jugadores = new ArrayList<>();
+        try (Connection conexionDataBase =
+            DriverManager.getConnection(URL_CONEXION, USUARIO_BD, PASSWORD_BD)){
+            Statement statement = conexionDataBase.createStatement();
+            String sql = "SELECT * FROM jugadores ORDER BY id";
+            ResultSet resultSet = statement.executeQuery(sql);
+            while(resultSet.next()){
+                Jugador jugador = new Jugador();
+                jugador.setClub(resultSet.getString("club"));
+                jugador.setNota(resultSet.getDouble("nota"));
+                jugador.setGoles(resultSet.getInt("goles"));
+                jugador.setPosicion(resultSet.getString("posicion"));
+                jugador.setDescripcion(resultSet.getString("descripcion"));
+                jugador.setNombre(resultSet.getString("nombre"));
+                jugador.setId(resultSet.getInt("id"));
+                jugadores.add(jugador);
+            }
+        } catch (Exception ex) {
+            throw new RuntimeException("Ocurrio un error al consultar la informacion: " + ex.getMessage());
+        }
+        return jugadores;
+    }
+    
+    public void eliminar(Jugador jugador){
+        
+        try (Connection conexionDataBase =
+            DriverManager.getConnection(URL_CONEXION, USUARIO_BD, PASSWORD_BD)){
+            Statement statement = conexionDataBase.createStatement();
+            String sql = "DELETE FROM jugadores WHERE id =" + jugador.getId();
+            statement.executeUpdate(sql);
+        } catch (Exception ex) {
+            throw new RuntimeException("Ocurrio un error al eliminar la informacion: " + ex.getMessage());
+        }
+        
+    }
+    
+    public Map<String, Integer> contarJugadoresPorClub(){
+
+        List<Jugador> jugadores = buscarTodos();
+        Map<String, Integer> jugadoresPorClub = new HashMap();
+        try (Connection conexionDataBase =
+            DriverManager.getConnection(URL_CONEXION, USUARIO_BD, PASSWORD_BD)){
+            Statement st = conexionDataBase.createStatement();
+            String sql = "SELECT id, count(*) as cantidad FROM jugadores GROUP BY club"; //club
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next()){
+                int idJugador = rs.getInt("id");
+                int cantidadJugadores = rs.getInt("cantidad");
+                
+                for(Jugador jugador : jugadores){
+                    if(jugador.getId() == idJugador){
+                        jugadoresPorClub.put(jugador.getClub(), cantidadJugadores);
+                        break;
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            throw new RuntimeException("Ocurrio un error al consultar la informacion: " + ex.getMessage());
+        }
+        return jugadoresPorClub;
+        
+    }
+    
+    
+}

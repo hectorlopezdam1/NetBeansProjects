@@ -1,0 +1,78 @@
+
+.button{
+    -fx-background-color: #66b3ff;
+    -fx-padding: 4;
+}
+
+.button:hover{
+    -fx-background-color: #80bfff;
+    -fx-color: -fx-hover-base;
+}
+
+.label{
+    -fx-background-color:#66b3ff;
+    -fx-border-color:black;
+    -fx-border-width: 1px;
+}
+
+.VBox{
+    -fx-background-image: url("../../../../img/fondof.jpg");
+}
+
+
+.combobox{
+   -fx-background-color:#66b3ff;
+   -fx-border-color:black;
+   -fx-border-width: 1px;
+}
+
+.rb1 {
+    -fx-background-color:#66b3ff;
+    -fx-border-color:black;
+    -fx-border-width: 1px;
+}
+
+.rb2{
+    -fx-background-color:#66b3ff;
+    -fx-border-color:black;
+    -fx-border-width: 1px;
+}
+
+.rb3{
+    -fx-background-color:#66b3ff;
+    -fx-border-color:black;
+    -fx-border-width: 1px;
+}
+
+.rb4{
+    -fx-background-color:#66b3ff;
+    -fx-border-color:black;
+    -fx-border-width: 1px;
+}
+
+.table-row-cell:odd {
+    -fx-background-color:#66b3ff;
+}
+
+.table-row-cell:even {
+    -fx-background-color:#80bfff;
+}
+
+.table-row-cell:focused {
+    -fx-text-fill:black;
+}
+
+.vBox2{
+    -fx-background-image: url("../../../../img/fondof.jpg");
+}
+
+.anchor{
+    -fx-background-image: url("../../../../img/fondof.jpg");
+}
+
+
+
+
+
+
+

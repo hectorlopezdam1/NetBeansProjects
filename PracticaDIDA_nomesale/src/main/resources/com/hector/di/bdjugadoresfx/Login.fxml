@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="vBox2" stylesheets="@estilos.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hector.di.bdjugadoresfx.LoginController">
+   <children>
+      <AnchorPane prefHeight="406.0" prefWidth="600.0">
+         <children>
+            <Label layoutX="122.0" layoutY="129.0" text="Usuario">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <Label layoutX="122.0" layoutY="175.0" text="Contraseña">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <TextField fx:id="nombre_usuario" layoutX="258.0" layoutY="129.0" prefHeight="25.0" prefWidth="220.0" />
+            <PasswordField fx:id="contraseña" layoutX="258.0" layoutY="175.0" prefHeight="25.0" prefWidth="220.0" />
+            <Button fx:id="btnEntrar" layoutX="122.0" layoutY="245.0" mnemonicParsing="false" onAction="#entrar" prefHeight="50.0" prefWidth="100.0" text="Entrar">
+               <font>
+                  <Font size="18.0" />
+               </font></Button>
+            <Button layoutX="250.0" layoutY="245.0" mnemonicParsing="false" onAction="#registrarse" prefHeight="50.0" prefWidth="100.0" text="Registrarse">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="377.0" layoutY="245.0" mnemonicParsing="false" onAction="#salir" prefHeight="50.0" prefWidth="100.0" text="Salir">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Text fx:id="alertText" fill="RED" layoutX="260.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="233.13671875" />
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>

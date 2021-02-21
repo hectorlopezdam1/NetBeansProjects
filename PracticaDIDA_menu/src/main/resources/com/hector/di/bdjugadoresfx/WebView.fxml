@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.web?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" spacing="20" fx:controller="com.hector.di.bdjugadoresfx.WebViewController">
+    
+    <padding>
+        <Insets top="10" rigth="10" bottom="10" left="10"/>
+    </padding>
+    
+    <Button text="Mostrar vista web" onAction="#mostrarWebView"/>
+    
+    <WebView fx:id="webView"></WebView>
+    
+</VBox>

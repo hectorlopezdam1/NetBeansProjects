@@ -1,4 +1,7 @@
 com\hector\di\bdjugadoresfx\Jugador.class
 com\hector\di\bdjugadoresfx\Formulario.class
+com\hector\di\bdjugadoresfx\UsuarioDao.class
 com\hector\di\bdjugadoresfx\ControladorFormularioJugador.class
+com\hector\di\bdjugadoresfx\LoginController.class
 com\hector\di\bdjugadoresfx\JugadorDao.class
+com\hector\di\bdjugadoresfx\RegisterController.class

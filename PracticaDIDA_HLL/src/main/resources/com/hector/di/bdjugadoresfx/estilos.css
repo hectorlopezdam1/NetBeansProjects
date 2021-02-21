@@ -62,6 +62,10 @@
     -fx-text-fill:black;
 }
 
+.vBox2{
+    -fx-background-image: url("../../../../img/fondof.jpg");
+}
+
 
 
 

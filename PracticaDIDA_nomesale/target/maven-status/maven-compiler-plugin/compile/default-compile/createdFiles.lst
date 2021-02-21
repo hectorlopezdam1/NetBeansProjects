@@ -1,0 +1,11 @@
+com\hector\di\bdjugadoresfx\ControladorJugadoresPorClub.class
+com\hector\di\bdjugadoresfx\Formulario.class
+com\hector\di\bdjugadoresfx\UsuarioDao.class
+com\hector\di\bdjugadoresfx\ControladorConNavegabilidad.class
+com\hector\di\bdjugadoresfx\LoginController.class
+com\hector\di\bdjugadoresfx\JugadorDao.class
+com\hector\di\bdjugadoresfx\Usuario.class
+com\hector\di\bdjugadoresfx\LayoutPane.class
+com\hector\di\bdjugadoresfx\Jugador.class
+com\hector\di\bdjugadoresfx\ControladorFormularioJugador.class
+com\hector\di\bdjugadoresfx\RegisterController.class

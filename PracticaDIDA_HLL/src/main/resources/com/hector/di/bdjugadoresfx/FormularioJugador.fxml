@@ -48,22 +48,36 @@
         <TextArea fx:id="descripcion" prefHeight="42.0" prefWidth="463.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
         
         <Label text="Goles" GridPane.rowIndex="7" />
-        <TextField fx:id="goles" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+        <TextField fx:id="goles" prefHeight="33.0" prefWidth="463.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
         
         <Label text="Nota" GridPane.rowIndex="8" />
         <TextField fx:id="nota" GridPane.columnIndex="1" GridPane.rowIndex="8" />
         
-        <ComboBox fx:id="combobox2" onAction="#comboChanged" prefWidth="150.0" promptText="Club" styleClass="combobox" GridPane.rowIndex="9" />
-        <Label fx:id="club" text="club" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-      <RadioButton fx:id="portero" mnemonicParsing="false" onAction="#radioSelect" styleClass="rb1" text="portero" GridPane.rowIndex="3">
+        <ComboBox fx:id="combobox2" prefWidth="150.0" promptText="Club" styleClass="combobox" GridPane.rowIndex="9" />
+      <RadioButton fx:id="portero" mnemonicParsing="false" styleClass="rb1" text="portero" GridPane.rowIndex="3">
          <toggleGroup>
             <ToggleGroup fx:id="posiciones" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="defensa" mnemonicParsing="false" onAction="#radioSelect" styleClass="rb2" text="defensa" toggleGroup="$posiciones" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <RadioButton fx:id="centrocampista" mnemonicParsing="false" onAction="#radioSelect" prefHeight="17.0" prefWidth="89.0" styleClass="rb3" text="centrocampista" toggleGroup="$posiciones" GridPane.rowIndex="4" />
-      <RadioButton fx:id="delantero" mnemonicParsing="false" onAction="#radioSelect" styleClass="rb4" text="delantero" toggleGroup="$posiciones" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-      <Label fx:id="posicion" text="posicion" GridPane.rowIndex="5" />
+      <RadioButton fx:id="defensa" mnemonicParsing="false" styleClass="rb2" text="defensa" toggleGroup="$posiciones" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <RadioButton fx:id="centrocampista" mnemonicParsing="false" prefHeight="17.0" prefWidth="89.0" styleClass="rb3" text="centrocampista" toggleGroup="$posiciones" GridPane.rowIndex="4" />
+      <RadioButton fx:id="delantero" mnemonicParsing="false" styleClass="rb4" text="delantero" toggleGroup="$posiciones" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <columnConstraints>
+         <ColumnConstraints />
+         <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints maxHeight="19.0" minHeight="19.0" prefHeight="19.0" />
+         <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+         <RowConstraints maxHeight="25.0" minHeight="0.0" prefHeight="0.0" />
+         <RowConstraints maxHeight="25.0" minHeight="0.0" prefHeight="25.0" />
+         <RowConstraints />
+         <RowConstraints />
+      </rowConstraints>
         
       
       

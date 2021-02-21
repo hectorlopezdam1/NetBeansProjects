@@ -1,0 +1,4 @@
+2021-02-13 12:09:42 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "USUARIO" no encontrada
+Table "USUARIO" not found; SQL statement:
+SELECT * FROM usuario [42102-200]

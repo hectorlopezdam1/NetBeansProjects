@@ -37,7 +37,7 @@ public class JugadorDao {
     }
     
     public void guardarOActualizar(Jugador jugador){
-        //Si el jugador todavia no esta registrado se guarda, en caso contrario se actualiza
+        
         if (jugador.getId() == 0){
             guardar(jugador);
         }else{

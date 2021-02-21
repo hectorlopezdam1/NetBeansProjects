@@ -43,9 +43,6 @@ public class ControladorFormularioJugador implements Initializable{
     RadioButton delantero;
     
     @FXML
-    Label posicion;
-    
-    @FXML
     TextField goles;
     
     @FXML
@@ -55,9 +52,6 @@ public class ControladorFormularioJugador implements Initializable{
     ComboBox<String> combobox2;
     
     ObservableList<String> listaComboBox2 = FXCollections.observableArrayList("ATM", "RMA", "FCB", "RCD", "VAL", "SEV", "VIL", "ATH");
-    
-    @FXML
-    Label club;
     
     @FXML
     TableView<Jugador> tablaJugadores;
@@ -70,33 +64,54 @@ public class ControladorFormularioJugador implements Initializable{
     
     //Coge el texto de cada campo en el formulario y lo aplica al objeto jugador
     public void guardar(){
+        if(!isInteger(goles.getText())){
+            Alert alert = new Alert(AlertType.INFORMATION); 
+            alert.setTitle("Tipo de dato no válido");
+            alert.setContentText("Introduce un número entero en el campo 'goles'");
+            alert.show();
+       }
        Jugador jugador = new Jugador();
        int golesint = Integer.parseInt(goles.getText());
        double notadouble = Double.parseDouble(nota.getText());
        jugador.setId(id);
        jugador.setDescripcion(descripcion.getText());
        jugador.setNombre(nombre.getText());
-       jugador.setPosicion(posicion.getText());
-       jugador.setClub(club.getText());
+       if(portero.isSelected()){
+           jugador.setPosicion("portero");
+       }else if(defensa.isSelected()){
+           jugador.setPosicion("defensa");
+       }else if(centrocampista.isSelected()){
+           jugador.setPosicion("centrocampista");
+       }else if(delantero.isSelected()){
+           jugador.setPosicion("delantero");
+       }
+       jugador.setClub(combobox2.getValue());
        jugador.setGoles(golesint);
        jugador.setNota(notadouble);
        
        //Si no selecciona ninguna posicion sale un mensaje de informacion
-       if (posicion.getText().equals("posicion")){
+       if (!portero.isSelected() && !defensa.isSelected() && !centrocampista.isSelected() && delantero.isSelected()){
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Seleccionar posición");
-            alert.setHeaderText("Se requiere elección de posición");
             alert.setContentText("Por favor, seleccione una posición válida");
-            Optional<ButtonType> result = alert.showAndWait();
+            alert.show();
             
        }//Lo mismo para el club
-       else if(club.getText().equals("club")){
+       if(combobox2.getValue().equals("Club")){
             Alert alert = new Alert(AlertType.INFORMATION); 
             alert.setTitle("Seleccionar club");
-            alert.setHeaderText("Se requiere elección de club");
             alert.setContentText("Por favor, seleccione un club válido");
-            Optional<ButtonType> result = alert.showAndWait();
+            alert.show();
        }
+       
+       if(notadouble < 0 || notadouble > 10){
+           Alert alert = new Alert(AlertType.INFORMATION); 
+            alert.setTitle("Nota no válida");
+            alert.setContentText("La nota debe ser un valor entre 0 y 10");
+            alert.show();
+       }
+       
+       
        
        else{//Llama al metodo de JugadorDao y luego vuelve a hacer un SELECT * FROM para refrescar la tabla
             jugadorDao.guardarOActualizar(jugador);
@@ -104,10 +119,18 @@ public class ControladorFormularioJugador implements Initializable{
             cargarJugadoresDeLaBase();
             nombre.clear();
             descripcion.clear();
-            posicion.setText("posicion");
+            combobox2.setValue("Club");
             goles.clear();
             nota.clear();
-            club.setText("club");
+            if (portero.isSelected()){
+                portero.setSelected(false);
+            }else if(defensa.isSelected()){
+                defensa.setSelected(false);
+            }else if(centrocampista.isSelected()){
+                centrocampista.setSelected(false);
+            }else if(delantero.isSelected()){
+                delantero.setSelected(false);
+            }
         }
     }
     //Al contrario que guardar, este metodo coge los valores del objeto jugador que está en la tabla, y los pone en los campos del formulario
@@ -117,10 +140,18 @@ public class ControladorFormularioJugador implements Initializable{
         String notaText = Double.toString(jugador.getNota());
         nombre.setText(jugador.getNombre());
         descripcion.setText(jugador.getDescripcion());
-        posicion.setText(jugador.getPosicion());
+        if(jugador.getPosicion().equals("portero")){
+            portero.setSelected(true);
+        }else if(jugador.getPosicion().equals("defensa")){
+            defensa.setSelected(true);
+        }else if(jugador.getPosicion().equals("centrocampista")){
+            centrocampista.setSelected(true);
+        }else{
+            delantero.setSelected(true);
+        }
+        combobox2.setValue(jugador.getClub());
         goles.setText(golesText);
         nota.setText(notaText);
-        club.setText(jugador.getClub());
         id = jugador.getId();
     }
     
@@ -130,7 +161,6 @@ public class ControladorFormularioJugador implements Initializable{
         alert.setTitle("Eliminar Jugador");
         alert.setHeaderText("Se requiere confirmación.");
         alert.setContentText("¿Seguro que desea eliminar este jugador?");
-
         Optional<ButtonType> result = alert.showAndWait();
         
         if (result.get() == ButtonType.OK){
@@ -143,38 +173,20 @@ public class ControladorFormularioJugador implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //Llena la combobox con los elementos de la lista
+        
         combobox2.setItems(listaComboBox2);
-        //el constructor de jugadorDao es el metodo creartablasinoexiste()
         jugadorDao = new JugadorDao();
         cargarJugadoresDeLaBase();
         configurarTamanhoColumnas();
     }
     
-    public void comboChanged(ActionEvent event){
-        //Le da a la label de club el club seleccionado en la combobox
-        club.setText(combobox2.getValue());
-    }
-    
-    public void radioSelect(ActionEvent event){
-        //Le da a la label de posicion la del radiobutton seleccionado
-        if(portero.isSelected()){
-            posicion.setText(portero.getText());
-        }else if(defensa.isSelected()){
-            posicion.setText(defensa.getText());
-        }else if(centrocampista.isSelected()){
-            posicion.setText(centrocampista.getText());
-        }else if(delantero.isSelected()){
-            posicion.setText(delantero.getText());
-        }
-    }
     
     //Llama al metodo buscarTodos de JugadorDao para hacer un SELECT * FROM y mostrar todos los jugadores
     private void cargarJugadoresDeLaBase() {
-        ObservableList<Jugador> jugadores = FXCollections.observableArrayList();
+        ObservableList<Jugador> departamentos = FXCollections.observableArrayList();
         List<Jugador> jugadoresEncontrados = jugadorDao.buscarTodos();
-        jugadores.addAll(jugadoresEncontrados);
-        tablaJugadores.setItems(jugadores);
+        departamentos.addAll(jugadoresEncontrados);
+        tablaJugadores.setItems(departamentos);
     }
     
     
@@ -189,6 +201,15 @@ public class ControladorFormularioJugador implements Initializable{
         columnas.get(5).setMaxWidth(1f * Integer.MAX_VALUE * 10);
         columnas.get(6).setMaxWidth(1f * Integer.MAX_VALUE * 4);
         
+    }
+    
+    private boolean isInteger(String goles){
+        try{
+            Integer.parseInt(goles);
+        }catch(NumberFormatException | NullPointerException e){
+            return false;
+        }
+        return true;
     }
     
 }
