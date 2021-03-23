@@ -1,0 +1,6 @@
+web\ServletControlador.class
+dominio\Usuario.class
+dominio\Receta.class
+datos\RecetaDaoJDBC.class
+datos\Conexion.class
+datos\UsuarioDao.class
