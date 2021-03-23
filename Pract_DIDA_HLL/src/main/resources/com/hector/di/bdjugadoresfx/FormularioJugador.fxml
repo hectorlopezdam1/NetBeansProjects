@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox styleClass="VBox"  xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hector.di.bdjugadoresfx.ControladorFormularioJugador">
+
+    <padding>
+        <Insets bottom="10" left="10" right="10" top="10">
+        </Insets>
+    </padding>
+                    
+        
+    <GridPane hgap="10" styleClass="gridPane" vgap="10">
+    
+        <padding>
+            <Insets bottom="10" left="10" right="10" top="10">
+            </Insets>
+        </padding>
+
+  
+        <Text style="-fx-font-weight: bold;" text="Registro de Jugadores" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0">
+        </Text>
+
+        <Label text="Nombre" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <TextField fx:id="nombre" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+        <Label text="Descripcion" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextArea fx:id="descripcion" prefHeight="42.0" prefWidth="463.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        
+        <Label text="Goles" GridPane.rowIndex="7" />
+        <TextField fx:id="goles" prefHeight="33.0" prefWidth="463.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+        
+        <Label text="Nota" GridPane.rowIndex="8" />
+        <TextField fx:id="nota" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+        
+        <ComboBox fx:id="combobox2" prefWidth="150.0" promptText="Club" styleClass="combobox" GridPane.rowIndex="9" />
+      <RadioButton fx:id="portero" mnemonicParsing="false" styleClass="rb1" text="portero" GridPane.rowIndex="3">
+         <toggleGroup>
+            <ToggleGroup fx:id="posiciones" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="defensa" mnemonicParsing="false" styleClass="rb2" text="defensa" toggleGroup="$posiciones" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <RadioButton fx:id="centrocampista" mnemonicParsing="false" prefHeight="17.0" prefWidth="89.0" styleClass="rb3" text="centrocampista" toggleGroup="$posiciones" GridPane.rowIndex="4" />
+      <RadioButton fx:id="delantero" mnemonicParsing="false" styleClass="rb4" text="delantero" toggleGroup="$posiciones" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <columnConstraints>
+         <ColumnConstraints />
+         <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints maxHeight="19.0" minHeight="19.0" prefHeight="19.0" />
+         <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+         <RowConstraints maxHeight="25.0" minHeight="0.0" prefHeight="0.0" />
+         <RowConstraints maxHeight="25.0" minHeight="0.0" prefHeight="25.0" />
+         <RowConstraints />
+         <RowConstraints />
+      </rowConstraints>
+        
+      
+      
+    </GridPane>
+        
+    <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="30.0" prefWidth="570.0" style="-fx-background-color: linear-gradient(#046ab1, #66b3ff);" HBox.hgrow="ALWAYS">
+        <Button onAction="#guardar">
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../img/guardar.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+        <Button onAction="#editar">
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../img/editar.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+        <Button onAction="#eliminar">
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../img/eliminar.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button mnemonicParsing="false" onAction="#mostrarGrafico" prefHeight="43.0" prefWidth="52.0">
+        <graphic>
+            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../img/grafico.png" />
+               </image>
+            </ImageView>
+        </graphic></Button>
+    </ToolBar>
+    
+    <StackPane HBox.hgrow="ALWAYS">
+        <TableView fx:id="tablaJugadores">
+            <columns>
+                <TableColumn text="Id">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="id">
+                        </PropertyValueFactory>
+                    </cellValueFactory>
+                </TableColumn>
+            
+                <TableColumn text="Nombre">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="nombre">
+                        </PropertyValueFactory>
+                    </cellValueFactory>
+                </TableColumn>
+            
+                <TableColumn text="Descripcion">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="descripcion">
+                        </PropertyValueFactory>
+                    </cellValueFactory>
+                </TableColumn>
+            
+                <TableColumn text="Posicion">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="posicion">
+                        </PropertyValueFactory>
+                    </cellValueFactory>
+                </TableColumn>
+            
+                <TableColumn text="Goles">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="goles">
+                        </PropertyValueFactory>
+                    </cellValueFactory>
+                </TableColumn>
+            
+                <TableColumn text="Nota">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="nota">
+                        </PropertyValueFactory>
+                    </cellValueFactory>
+                </TableColumn>
+            
+                <TableColumn text="Club">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="club">
+                        </PropertyValueFactory>
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+    </StackPane>
+</VBox>

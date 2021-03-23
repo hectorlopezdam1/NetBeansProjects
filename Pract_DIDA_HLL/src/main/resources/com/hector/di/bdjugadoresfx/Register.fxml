@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="anchor" stylesheets="@estilos.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hector.di.bdjugadoresfx.RegisterController">
+    
+    <Button layoutX="372.0" layoutY="270.0" onAction="#registrarse" prefHeight="29.0" prefWidth="92.0" text="Registrarse">
+      <font>
+         <Font size="14.0" />
+      </font></Button>
+   <Label layoutX="80.0" layoutY="80.0" text="Nombre de Usuario">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </Label>
+   <Label layoutX="80.0" layoutY="140.0" text="Contraseña">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </Label>
+   <Label layoutX="80.0" layoutY="200.0" text="Confirmar Contraseña">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </Label>
+   <TextField fx:id="nombreUs" layoutX="300.0" layoutY="80.0" prefHeight="25.0" prefWidth="255.0" />
+   <Button fx:id="backbtn" layoutX="14.0" layoutY="14.0" onAction="#volverAlLogin" prefHeight="29.0" prefWidth="58.0" text="Volver">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </Button>
+   <PasswordField fx:id="password" layoutX="300.0" layoutY="140.0" prefHeight="25.0" prefWidth="255.0" />
+   <PasswordField fx:id="confirmPassword" layoutX="300.0" layoutY="200.0" prefHeight="25.0" prefWidth="255.0" />
+   <Text fx:id="alertText2" fill="RED" layoutX="80.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="176.0" />
+    
+</AnchorPane>
